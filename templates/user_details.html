@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+			<img src="{{ url_for('static', filename='logo.png') }}">
+			<h3 class="title">HEALTH CONNECT</h3>
+		</header>
+        
+        <main>
+            <section>
+                <form action="/user_details" method="post" class="input_container" enctype="multipart/form-data">
+                    <label for="user_name">Name</label>
+                    <input type="text" name="user_name">
+                    <label for="user_img">Image</label>
+                    <input type="file" name="user_img" id="" accept="image/*">
+                    <label for="user_age">Age</label>
+                    <input type="number" name="user_age" id="">
+                    <label for="dd_gender">Gender</label>
+                    <select name="user_gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                    <label for="user_bloodgrp">Blood Group</label>
+                    <input type="text" name="user_bloodgrp" placeholder="Eg : B+">
+                    <label for="user_affected_with">Affected With</label>
+                    <select name="user_affected_with" >
+                        <option value="None">None</option>
+                        <option value="Cardiovascular Diseases">Cardiovascular Diseases</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="Respiratory diseases">Respiratory diseases</option>
+                        <option value="Tuberculosis">Tuberculosis</option>
+                        <option value="Malaria">Malaria</option>
+                        <option value="Diarrhoea">Diarrhoea</option>
+                        <option value="Stroke">Stroke</option>
+                        <option value="Hepatitis">Hepatitis</option>
+                        <option value="Cancer">Cancer</option>
+                        <option value="Coronavirus disease 2019">Coronavirus disease 2019</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+                <br>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

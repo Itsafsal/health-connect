@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.png') }}">
+        <h3 class="title">HEALTH CONNECT</h3><div style="padding-right: 40%;"></div>
+        <a class="navi" href="{{url_for('home')}}">Home</a><div style="padding-left: 3%;"></div>
+		<a class="navi" href="{{url_for('uploads')}}">Upload data</a><div style="padding-left: 3%;"></div>
+		<a class="navi" href="{{ url_for('get_image') }}">Share data</a><div style="padding-left: 3%;"></div>
+		<a class="navi" href="{{ url_for('insert_rec') }}"  style="background-color: #05386bc9; color: #ffff;" >About</a>
+    </header>
+    <div class="lable">
+        <div  class="lable_container">
+            <h1>Admin Page</h1>
+        </div>    <HR>
+
+        <form action="" class="input_container" id="AdminForm" enctype="multipart/form-data" method="post">
+            <div class="adminpageselection"> <!--for radio button--->
+                <label>
+                    <input type="radio" name="inputType" value="Doctors_portal" onclick="changeInputs('doctor')"> Doctors portal 
+                </label> &nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="inputType" value="Users_portal" onclick="changeInputs('user')"> Users portal
+                </label>    
+            </div>
+            
+            <div id="inputContainer">
+                <!-- Dynamic inputs will be inserted here -->
+            </div>
+
+            <script>
+                function changeInputs(inputType) {
+                    var inputContainer = document.getElementById('inputContainer');
+                    var form = document.getElementById('AdminForm');
+                    inputContainer.innerHTML = ''; // Clear previous inputs
+        
+                    if (inputType === 'doctor') {
+                        form.action = "/insert_doctor_rec";
+                        inputContainer.innerHTML = ' <label for="doc_name">Doctor Name</label><input type="text" name="doc_name" id="txt_docname"><label for="doc_img">Doctor Photo</label><input type="file" name="doc_img" accept="image/*"><label for="doc_cat">Doctor Category</label><select name="doc_cat" id="cmb_category"><option value="General doctors">General doctor</option><option value="Dental(Teeth)">Dental</option><option value="Cardiologist(Heart)">Cardiologist</option><option value="Paediatricians(Child Speclist)">Paediatricians(Child Speclist)</option><option value="Neurologist(Nerves and Brain)">Neurologist</option><option value="ENT(Ears, Nose and Throat)">ENT(Ears, Nose and Throat)</option><option value="Physiotherapy(Joints, Muscles, or Nerves)">Physiotherapy</option><option value="Nephrologist(Kidney)">Nephrologist</option><option value="Urologist(Urinary system)">Urologist</option><option value="Asthma(Breathing)">Asthma</option><option value="Gastroenterologist">Gastroenterologist</option><option value="Skin doctor">Skin doctor</option></select><label for="doc_dict">District</label><select name="doc_dict" id="cmb_district"><option value="Tirunelveli">Tirunelveli</option><option value="Thoothukudi">Thoothukudi</option><option value="Tenkasi">Tenkasi</option><option value="Tenkasi">Coimbator</option><option value="Tenkasi">Kanyakumari</option></select><label for="doc_city">City</label><input type="text" name="doc_city" id="txt_city"><label for="doc_addr">Addres</label><input type="text" name="doc_addr" id="txt_address"><label for="doc_hos">Hospital Name</label><input type="text" name="doc_hos" id="txt_hospital"><label for="doc_num">Phone Number</label><input type="number" name="doc_num" id="txt_phone"><br><label >Available Time</label><label for="doc_time_in">Time IN</label><input type="time" name="doc_time_in" id="time_IN" class="input_time"><label for="doc_time_out">Time OUT</label><input type="time" name="doc_time_out" id="time_OUT" class="input_time"><lable for="map_code" name="map_code"> Google Map Code</lable><textarea id="map_code" name="map_code" rows="4" cols="60"></textarea><br><center><br><input type="submit" value="Insert"></center>';
+                    } 
+                    else if (inputType === 'user') {
+                        form.action = "/insert_user_rec";
+                        inputContainer.innerHTML = ' <div style="color:white;font-weight:600;"><center>Enter the Username and Password to make changes on your profile</center></div><label for="user_name">User Name</label><input type="text" name="user_name" id="txt_username"><label for="user_pass">Password</label><input type="password" name="user_pass" id="user_pass"><br><br><center><input type="submit" value="Submit"></center><center><br>{{msg}}</center>';
+                    }
+                    // You can add more conditions for other input types as needed
+                }
+            </script>
+            
+            <!--
+            <label for="doc_cat">Doctor Category</label>
+            <select name="doc_cat" id="cmb_category">
+                <option value="General doctor">General doctor</option>
+                <option value="Dental">Dental</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Paediatricians">Paediatricians</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="ENT">ENT(Ears, Nose and Throat)</option>
+                <option value="Physiotherapy">Physiotherapy</option>
+                <option value="Nephrologist">Nephrologist</option>
+                <option value="Urologist">Urologist</option>
+                <option value="Asthma">Asthma</option>
+                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="Skin doctor">Skin doctor</option>
+            </select>
+            <label for="doc_dict">District</label>
+            <select name="doc_dict" id="cmb_district">
+                <option value="Tirunelveli">Tirunelveli</option>
+                <option value="Thoothukudi">Thoothukudi</option>
+                <option value="Tenkasi">Tenkasi</option>
+            </select>
+            <label for="doc_city">City</label>
+            <input type="text" name="doc_city" id="txt_city">
+            <label for="doc_addr">Address</label>
+            <input type="text" name="doc_addr" id="txt_address">
+            <label for="doc_hos">Hospital Name</label>
+            <input type="text" name="doc_hos" id="txt_hospital">
+            <label for="doc_num">Phone Number</label>
+            <input type="number" name="doc_num" id="txt_phone">
+            <br>
+            <label >Available Time</label>
+            <label for="doc_time_in">Time IN</label>
+            <input type="time" name="doc_time_in" id="time_IN" class="input_time">
+            <label for="doc_time_out">Time OUT</label>
+            <input type="time" name="doc_time_out" id="time_OUT" class="input_time">
+            <br>
+            <lable for="map_code" name="map_code"> Google Map Code</lable><textarea id="map_code" name="map_code" rows="4" cols="60"></textarea><br>
+            <input type="submit" value="Insert">
+
+            -->
+            
+        </form>
+    </div> 
+    <br>
+</body>
+</html>

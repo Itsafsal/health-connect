@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        .card-details {
+            background-color: #05386b;
+            padding: 12px 14px;
+            width: 26% fit-content;
+            margin: auto;
+            color: white;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+
+        .card-details iframe {
+            margin-top: 30px;
+            width: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container1">
+        {% for doctor in doc_details %}
+        <div style="
+        padding: 6%;
+        margin: auto;">
+
+                <h1 class="card-details-view">Doctor name</h1>
+                <h1 class="card-details-view2">{{ doctor[1]}}</h1><br>
+                <h1 class="card-details-view">Hospital name</h1>
+                <h1 class="card-details-view2">{{ doctor[8]}}</h1><br>
+                <h1 class="card-details-view">Phone number</h1>
+                <h1 class="card-details-view2">{{ doctor[9]}}</h1><br>
+                <h1 class="card-details-view">City</h1>
+                <h1 class="card-details-view2">{{ doctor[6]}}</h1><br>
+                <h1 class="card-details-view">Address of the hospital</h1>
+                <h1 class="card-details-view2">{{ doctor[7]}}</h1><br>
+                <h1 class="card-details-view">Doctor visiting timing</h1>
+                <h1 style="text-align: center;">{{ doctor[10]}} to {{doctor[11]}}</h1><br>
+                <h1 class="card-details-view">District</h1>
+                <h1 class="card-details-view2">{{ doctor[5]}}</h1><br>
+                
+
+            </div>
+            <div style="padding: 4%;margin: auto;">
+                <center>
+                    <iframe src="{{doctor[12]}}" width="500" height="500" style="border:0;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        style="border: 1px solid #ccc; padding: 10px; align-content: center;">
+                    </iframe>
+                </center>
+            </div> 
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
